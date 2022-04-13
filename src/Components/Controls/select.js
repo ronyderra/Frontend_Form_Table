@@ -44,7 +44,7 @@ export default function Select(props) {
                 <MenuItem value="">None</MenuItem>
                 {
                     data && data.map(
-                        (item, key) => (<MenuItem key={key} value={item.Code}>{item.Description || item.BranchNumber}</MenuItem>)
+                        (item, key) => (<MenuItem key={key} value={item.Description || item.BranchNumber}>{item.Description || item.BranchNumber}</MenuItem>)
                     )
 
                 }
