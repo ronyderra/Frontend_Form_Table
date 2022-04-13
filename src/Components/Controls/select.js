@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@material-ui/core';
 import axios from 'axios'
-export default function Select(props) {
 
+export default function Select(props) {
     const [data, setData] = useState([{}])
     const { name, label, value, error = null, onChange, options } = props;
 
