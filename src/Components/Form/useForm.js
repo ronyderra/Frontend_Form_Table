@@ -1,9 +1,26 @@
 import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core";
-import axios from "axios";
+// import axios from "axios";
 
+const initialFValues = {
+    nameH: '',
+    nameE: '',
+    personalId: '',
+    bank: '',
+    city: '',
+    date: new Date(),
+    branch: '',
+}
 
 export function useForm(validateOnChange = false) {
+
+    const [values, setValues] = useState(initialFValues);
+    const [errors, setErrors] = useState({});
+
+    const contains_heb = (str)=> {
+        console.log((/[\u0590-\u05FF]/).test(str))
+        return (/[\u0590-\u05FF]/).test(str);
+    }
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -26,31 +43,11 @@ export function useForm(validateOnChange = false) {
             ...temp
         })
 
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
+        if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
     }
-
-    const contains_heb = (str)=> {
-        console.log((/[\u0590-\u05FF]/).test(str))
-        return (/[\u0590-\u05FF]/).test(str);
-    }
-
-    const initialFValues = {
-        nameH: '',
-        nameE: 'GAL',
-        personalId: '313287341',
-        bank: '',
-        city: '',
-        date: new Date(),
-        branch: '',
-    }
-
-    const [values, setValues] = useState(initialFValues);
-    const [errors, setErrors] = useState({});
 
     const handleInputChange = e => {
-
-
         const { name, value } = e.target
         setValues({
             ...values,
@@ -59,7 +56,6 @@ export function useForm(validateOnChange = false) {
         if (validateOnChange)
             validate({ [name]: value })
     }
-
     const resetForm = () => {
         setValues(initialFValues);
         setErrors({})
@@ -67,9 +63,7 @@ export function useForm(validateOnChange = false) {
 
 
     const setNewRow = async (newRow) => {
-
         console.log(newRow)
-
         // const date = newRow.date.toLocaleTimeString(["he-US"], {
         //     month: 'numeric',
         //     day: 'numeric',
@@ -111,7 +105,6 @@ export function useForm(validateOnChange = false) {
         validate
     }
 }
-
 
 const useStyles = makeStyles(theme => ({
     root: {
