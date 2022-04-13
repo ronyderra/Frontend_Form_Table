@@ -16,11 +16,14 @@ export default function Select(props) {
                     break;
                 case 'banks':
                     const resBanks = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    setData(resBanks)
+                    const banks = resBanks.data.Data.Banks
+                    setData(banks)
                     break;
                 case 'branch':
                     const resBranch = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    setData(resBranch)
+                    console.log(resBranch)
+                    const branches = resBranch.data.Data.BankBranches.slice(0, 10)
+                    setData(branches)
                     break;
                 default:
                     return;
@@ -41,8 +44,9 @@ export default function Select(props) {
                 <MenuItem value="">None</MenuItem>
                 {
                     data && data.map(
-                        (item, key) => (<MenuItem key={key} value={item.id}>{item.Description}</MenuItem>)
+                        (item, key) => (<MenuItem key={key} value={item.Code}>{item.Description || item.BranchNumber}</MenuItem>)
                     )
+
                 }
             </MuiSelect>
             {error && <FormHelperText>{error}</FormHelperText>}
