@@ -7,16 +7,20 @@ export function useForm(validateOnChange = false) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('submitter' in fieldValues)
-            temp.submitter = fieldValues.submitter ? "" : "This field is required."
-        if ('action' in fieldValues)
-            temp.action = fieldValues.action ? "" : "This field is required."
-        if ('amount' in fieldValues)
-            temp.amount = fieldValues.amount !== '$' ? "" : "This field is required."
-        if ('accountNumber' in fieldValues)
-            temp.accountNumber = fieldValues.accountNumber.length <= 6 && fieldValues.accountNumber !== '' ? "" : "account number is too long"
-        if ('currency' in fieldValues)
-            temp.currency = fieldValues.currency ? "" : "This field is required."
+        if ('nameH' in fieldValues)
+            temp.nameH = fieldValues.nameH.length > 21 || !contains_heb(fieldValues.nameH) ? "This field is required." : ""
+        if ('nameE' in fieldValues)
+            temp.nameE = fieldValues.nameE ? "" : "This field is required."
+        if ('date' in fieldValues)
+            temp.date = fieldValues.date !== '$' ? "" : "This field is required."
+        if ('personalId' in fieldValues)
+            temp.personalId = fieldValues.personalId.length !== 9 ? "account number is too long" : ""
+        if ('bank' in fieldValues)
+            temp.bank = fieldValues.bank ? "" : "This field is required."
+        if ('city' in fieldValues)
+            temp.city = fieldValues.city ? "" : "This field is required."
+        if ('branch' in fieldValues)
+            temp.branch = fieldValues.branch ? "" : "This field is required."
 
         setErrors({
             ...temp
@@ -26,21 +30,27 @@ export function useForm(validateOnChange = false) {
             return Object.values(temp).every(x => x == "")
     }
 
+    const contains_heb = (str)=> {
+        console.log((/[\u0590-\u05FF]/).test(str))
+        return (/[\u0590-\u05FF]/).test(str);
+    }
+
     const initialFValues = {
-        Description: 'gal',
-        action: '',
-        amount: '$',
-        accountNumber: '123456',
-        platform: 'ib',
+        nameH: '',
+        nameE: 'GAL',
+        personalId: '313287341',
+        bank: '',
+        city: '',
         date: new Date(),
-        currency: 'USD',
-        reason: 'שערוך שגוי'
+        branch: '',
     }
 
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
 
     const handleInputChange = e => {
+
+
         const { name, value } = e.target
         setValues({
             ...values,
@@ -58,34 +68,36 @@ export function useForm(validateOnChange = false) {
 
     const setNewRow = async (newRow) => {
 
-        const date = newRow.date.toLocaleTimeString(["he-US"], {
-            month: 'numeric',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+        console.log(newRow)
 
-        const response = await axios.get("https://xnesdeskserver.herokuapp.com/api/users/accountNumber", { params: { accountNumber: newRow.accountNumber } })
-        if (response.data.length === 0) {
-            alert('no data founf')
-            return
-        }
-        const newRowData = {
-            "submitter": newRow.submitter,
-            "action": newRow.action,
-            "amount": newRow.amount,
-            "accountNumber": newRow.accountNumber,
-            "date": date,
-            "currency": newRow.currency,
-            "platform": newRow.platform,
-            "reason": newRow.reason,
-            "fullName": response.data[0].fullName,
-            "unumber": response.data[0].unumber,
-            "sheled": response.data[0].sheled,
-            "status": "pending"
+        // const date = newRow.date.toLocaleTimeString(["he-US"], {
+        //     month: 'numeric',
+        //     day: 'numeric',
+        //     hour: '2-digit',
+        //     minute: '2-digit'
+        // });
 
-        }
-        const postingResponse = await axios.post("https://xnesdeskserver.herokuapp.com/api/buyingPowerList", { mode: 'cors', newRowData })
+        // const response = await axios.get("https://xnesdeskserver.herokuapp.com/api/users/accountNumber", { params: { accountNumber: newRow.accountNumber } })
+        // if (response.data.length === 0) {
+        //     alert('no data founf')
+        //     return
+        // }
+        // const newRowData = {
+        //     "submitter": newRow.submitter,
+        //     "action": newRow.action,
+        //     "amount": newRow.amount,
+        //     "accountNumber": newRow.accountNumber,
+        //     "date": date,
+        //     "currency": newRow.currency,
+        //     "platform": newRow.platform,
+        //     "reason": newRow.reason,
+        //     "fullName": response.data[0].fullName,
+        //     "unumber": response.data[0].unumber,
+        //     "sheled": response.data[0].sheled,
+        //     "status": "pending"
+
+        // }
+        // const postingResponse = await axios.post("https://xnesdeskserver.herokuapp.com/api/buyingPowerList", { mode: 'cors', newRowData })
     }
 
     return {
