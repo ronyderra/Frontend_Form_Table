@@ -20,7 +20,6 @@ export function useForm(validateOnChange = false) {
     const [disabled, setDisabled] = useState(true)
     const [bankValue, setBankValue] = useState(4)
 
-
     const contains_heb = (str) => {
         console.log((/[\u0590-\u05FF]/).test(str))
         return (/[\u0590-\u05FF]/).test(str);
@@ -28,14 +27,17 @@ export function useForm(validateOnChange = false) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
+
+
+
         if ('nameH' in fieldValues)
-            temp.nameH = fieldValues.nameH.length > 21 || !contains_heb(fieldValues.nameH) ? "This field is required." : ""
+            temp.nameH = fieldValues.nameH || fieldValues.nameH.length > 21 || !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : ""
         if ('nameE' in fieldValues)
-            temp.nameE = fieldValues.nameE ? "" : "This field is required."
+            temp.nameE = fieldValues.nameE || fieldValues.nameE.length > 16 ? "" : "*This field is required. *Only English"
         if ('date' in fieldValues)
             temp.date = fieldValues.date !== '$' ? "" : "This field is required."
         if ('personalId' in fieldValues)
-            temp.personalId = fieldValues.personalId.length !== 9 ? "account number is too long" : ""
+            temp.personalId = fieldValues.personalId.length !== 9 ? "*This field is required. *Nine Numbers Only." : ""
         if ('bank' in fieldValues)
             temp.bank = fieldValues.bank ? "" : "This field is required."
         if ('city' in fieldValues)
