@@ -41,8 +41,6 @@ export default function MainForm() {
                             value={values.date}
                             onChange={handleInputChange}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
                         <Controls.Input
                             label="Personal Id"
                             name="personalId"
@@ -50,6 +48,8 @@ export default function MainForm() {
                             onChange={handleInputChange}
                             error={errors.personalId}
                         />
+                    </Grid>
+                    <Grid item xs={6}>
                         <Controls.Select
                             name="city"
                             label="City"
@@ -75,6 +75,13 @@ export default function MainForm() {
                             error={errors.branch}
                             boolien={disabled}
                             bankNumber={bankValue}
+                        />
+                        <Controls.Input
+                            label="Account Number"
+                            name="accountNumber"
+                            value={values.accountNumber}
+                            onChange={handleInputChange}
+                            error={errors.accountNumber}
                         />
                         <br />
                         <Controls.Button

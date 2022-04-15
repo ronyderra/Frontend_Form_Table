@@ -10,6 +10,7 @@ const initialFValues = {
     city: '',
     date: new Date(),
     branch: '',
+    accountNumber: ""
 }
 
 export function useForm(validateOnChange = false) {
@@ -41,6 +42,8 @@ export function useForm(validateOnChange = false) {
             temp.city = fieldValues.city ? "" : "This field is required."
         if ('branch' in fieldValues)
             temp.branch = fieldValues.branch ? "" : "This field is required."
+        if ('accountNumber' in fieldValues)
+            temp.accountNumber = temp.accountNumber ? "" : "This field is required."
 
         setErrors({
             ...temp
