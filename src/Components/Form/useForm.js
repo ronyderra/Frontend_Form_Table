@@ -16,8 +16,9 @@ export function useForm(validateOnChange = false) {
 
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
+    const [disabled, setDisabled] = useState(true)
 
-    const contains_heb = (str)=> {
+    const contains_heb = (str) => {
         console.log((/[\u0590-\u05FF]/).test(str))
         return (/[\u0590-\u05FF]/).test(str);
     }
@@ -56,6 +57,20 @@ export function useForm(validateOnChange = false) {
         if (validateOnChange)
             validate({ [name]: value })
     }
+
+
+    const handleBankSelection = (e) => {
+        const { name, value } = e.target
+        setValues({
+            ...values,
+            [name]: value
+        })
+        if (validateOnChange)
+            validate({ [name]: value })
+
+        setDisabled(false)
+    }
+
     const resetForm = () => {
         setValues(initialFValues);
         setErrors({})
@@ -102,7 +117,9 @@ export function useForm(validateOnChange = false) {
         handleInputChange,
         resetForm,
         setNewRow,
-        validate
+        validate,
+        disabled,
+        handleBankSelection
     }
 }
 
@@ -110,7 +127,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         '& .MuiFormControl-root': {
             width: '80%',
-            margin: theme.spacing(1)
+            margin: theme.spacing(1),
         }
     }
 }))

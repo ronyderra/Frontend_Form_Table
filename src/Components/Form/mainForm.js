@@ -5,7 +5,7 @@ import { useForm, Form } from './useForm';
 
 export default function MainForm() {
 
-    const { setNewRow, validate, values, errors, handleInputChange, resetForm } = useForm(true);
+    const {disabled,handleBankSelection, setNewRow, validate, values, errors, handleInputChange, resetForm } = useForm(true);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -36,7 +36,7 @@ export default function MainForm() {
                         />
                         <Controls.DatePicker
                             name="date"
-                            label="Date"
+                            label="Birth Date"
                             value={values.date}
                             onChange={handleInputChange}
                         />
@@ -61,7 +61,7 @@ export default function MainForm() {
                             name="bank"
                             label="Bank"
                             value={values.bank}
-                            onChange={handleInputChange}
+                            onChange={handleBankSelection}
                             options={'banks'}
                             error={errors.bank}
                         />
@@ -72,6 +72,7 @@ export default function MainForm() {
                             onChange={handleInputChange}
                             options={'branch'}
                             error={errors.branch}
+                            boolien={disabled}
                         />
                         <br />
                         <Controls.Button

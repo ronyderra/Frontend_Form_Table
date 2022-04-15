@@ -4,7 +4,10 @@ import axios from 'axios'
 
 export default function Select(props) {
     const [data, setData] = useState([{}])
-    const { name, label, value, error = null, onChange, options } = props;
+    const { name, label, value, error = null, onChange, options, boolien } = props;
+
+
+
 
     useEffect(() => {
         const getData = async () => {
@@ -21,7 +24,6 @@ export default function Select(props) {
                     break;
                 case 'branch':
                     const resBranch = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    console.log(resBranch)
                     const branches = resBranch.data.Data.BankBranches.slice(0, 10)
                     setData(branches)
                     break;
@@ -30,10 +32,10 @@ export default function Select(props) {
             }
         }
         getData()
-    }, [])
+    }, [boolien])
 
     return (
-        <FormControl variant="outlined"
+        <FormControl variant="outlined" disabled={boolien}
             {...(error && { error: true })}>
             <InputLabel>{label}</InputLabel>
             <MuiSelect
