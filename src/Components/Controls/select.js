@@ -4,35 +4,31 @@ import axios from 'axios'
 
 export default function Select(props) {
     const [data, setData] = useState([{}])
-    const { name, label, value, error = null, onChange, options, boolien } = props;
-
-
-
+    const { name, label, value, error = null, onChange, options, boolien, bankNumber } = props;
 
     useEffect(() => {
         const getData = async () => {
+            const dataResponse = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
             switch (options) {
                 case 'cities':
-                    const resCities = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    const tenCities = resCities.data.Data.Cities.slice(0, 10)
-                    setData(tenCities)
+                    const tenCities = dataResponse.data.Data.Cities.slice(0, 10);
+                    setData(tenCities);
                     break;
                 case 'banks':
-                    const resBanks = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    const banks = resBanks.data.Data.Banks
-                    setData(banks)
+                    const banks = dataResponse.data.Data.Banks;
+                    setData(banks);
                     break;
                 case 'branch':
-                    const resBranch = await axios.get('https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation')
-                    const branches = resBranch.data.Data.BankBranches.slice(0, 10)
-                    setData(branches)
+                    const relaventBranches = dataResponse.data.Data.BankBranches.filter((i => i.BranchNumber === bankNumber));
+                    const relaventBranchesNames = relaventBranches.map(i => i.BranchName);
+                    setData(relaventBranchesNames);
                     break;
                 default:
                     return;
             }
         }
         getData()
-    }, [boolien])
+    }, [boolien, bankNumber])
 
     return (
         <FormControl variant="outlined" disabled={boolien}
@@ -46,7 +42,7 @@ export default function Select(props) {
                 <MenuItem value="">None</MenuItem>
                 {
                     data && data.map(
-                        (item, key) => (<MenuItem key={key} value={item.Description || item.BranchNumber}>{item.Description || item.BranchNumber}</MenuItem>)
+                        (item, key) => (<MenuItem key={key} value={item.Code || item.BranchNumber || item}>{item.Description || item.BranchNumber || item}</MenuItem>)
                     )
 
                 }

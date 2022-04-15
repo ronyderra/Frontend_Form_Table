@@ -5,7 +5,8 @@ import { useForm, Form } from './useForm';
 
 export default function MainForm() {
 
-    const {disabled,handleBankSelection, setNewRow, validate, values, errors, handleInputChange, resetForm } = useForm(true);
+    const { disabled, bankValue, handleBankSelection, setNewRow, validate, values,
+        errors, handleInputChange, resetForm } = useForm(true);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -73,6 +74,7 @@ export default function MainForm() {
                             options={'branch'}
                             error={errors.branch}
                             boolien={disabled}
+                            bankNumber={bankValue}
                         />
                         <br />
                         <Controls.Button

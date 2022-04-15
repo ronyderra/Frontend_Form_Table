@@ -17,6 +17,8 @@ export function useForm(validateOnChange = false) {
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
     const [disabled, setDisabled] = useState(true)
+    const [bankValue, setBankValue] = useState(4)
+
 
     const contains_heb = (str) => {
         console.log((/[\u0590-\u05FF]/).test(str))
@@ -69,6 +71,7 @@ export function useForm(validateOnChange = false) {
             validate({ [name]: value })
 
         setDisabled(false)
+        setBankValue(value)
     }
 
     const resetForm = () => {
@@ -119,7 +122,8 @@ export function useForm(validateOnChange = false) {
         setNewRow,
         validate,
         disabled,
-        handleBankSelection
+        handleBankSelection,
+        bankValue
     }
 }
 
