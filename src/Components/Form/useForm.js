@@ -10,7 +10,7 @@ const initialFValues = {
     city: '',
     date: new Date(),
     branch: '',
-    accountNumber: ""
+    accountNumber: ''
 }
 
 export function useForm(validateOnChange = false) {
@@ -31,21 +31,21 @@ export function useForm(validateOnChange = false) {
 
 
         if ('nameH' in fieldValues)
-            temp.nameH = fieldValues.nameH || fieldValues.nameH.length > 21 || !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : ""
+            temp.nameH =  !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : "";
         if ('nameE' in fieldValues)
-            temp.nameE = fieldValues.nameE || fieldValues.nameE.length > 16 ? "" : "*This field is required. *Only English"
+            temp.nameE = fieldValues.nameE || fieldValues.nameE.length > 16 ? "" : "*This field is required. *Only English";
         if ('date' in fieldValues)
-            temp.date = fieldValues.date !== '$' ? "" : "This field is required."
+            temp.date = fieldValues.date !== '$' ? "" : "This field is required.";
         if ('personalId' in fieldValues)
-            temp.personalId = fieldValues.personalId.length !== 9 ? "*This field is required. *Nine Numbers Only." : ""
+            temp.personalId = fieldValues.personalId.length !== 9 ? "*This field is required. *Nine Numbers Only." : "";
         if ('bank' in fieldValues)
-            temp.bank = fieldValues.bank ? "" : "This field is required."
+            temp.bank = fieldValues.bank ? "" : "This field is required.";
         if ('city' in fieldValues)
-            temp.city = fieldValues.city ? "" : "This field is required."
+            temp.city = fieldValues.city ? "" : "This field is required.";
         if ('branch' in fieldValues)
-            temp.branch = fieldValues.branch ? "" : "This field is required."
+            temp.branch = fieldValues.branch ? "" : "This field is required.";
         if ('accountNumber' in fieldValues)
-            temp.accountNumber = temp.accountNumber ? "" : "This field is required."
+            temp.accountNumber = fieldValues.accountNumber ? "" : "This field is required.";
 
         setErrors({
             ...temp
@@ -57,6 +57,7 @@ export function useForm(validateOnChange = false) {
 
     const handleInputChange = e => {
         const { name, value } = e.target
+        // console.log(value)
         setValues({
             ...values,
             [name]: value

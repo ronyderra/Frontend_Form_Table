@@ -39,10 +39,10 @@ export default function Select(props) {
                 name={name}
                 value={value}
                 onChange={onChange}>
-                <MenuItem value="">None</MenuItem>
+                <MenuItem dir='rtl' value="">None</MenuItem>
                 {
                     data && data.map(
-                        (item, key) => (<MenuItem key={key} value={item.Code || item.BranchNumber || item}>{item.Description || item.BranchNumber || item}</MenuItem>)
+                        (item, key) => (<MenuItem dir='rtl' key={key} value={item.Code || item.BranchNumber || item}>{item.Description || item.BranchNumber || item}</MenuItem>)
                     )
 
                 }

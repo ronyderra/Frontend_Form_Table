@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core';
 import Controls from "../Controls/controls";
 import { useForm, Form } from './useForm';
-    
+
 export default function MainForm() {
 
     const { disabled, bankValue, handleBankSelection, setNewRow, validate, values,
@@ -27,6 +27,7 @@ export default function MainForm() {
                             value={values.nameH}
                             onChange={handleInputChange}
                             error={errors.nameH}
+                            direction={"rtl"}
                         />
                         <Controls.Input
                             label="Name In English"
