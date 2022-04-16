@@ -57,7 +57,6 @@ export default function MainForm() {
                             label="City"
                             value={values.city}
                             onChange={handleInputChange}
-                            options={'cities'}
                             error={errors.city}
                         />
                         <Controls.Select
@@ -65,7 +64,6 @@ export default function MainForm() {
                             label="Bank"
                             value={values.bank}
                             onChange={handleBankSelection}
-                            options={'banks'}
                             error={errors.bank}
                         />
                         <Controls.Select
@@ -73,7 +71,6 @@ export default function MainForm() {
                             label="Branch"
                             value={values.branch}
                             onChange={handleInputChange}
-                            options={'branch'}
                             error={errors.branch}
                             boolien={disabled}
                             bankNumber={bankValue}

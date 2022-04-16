@@ -57,8 +57,9 @@ export function useForm(validateOnChange = false) {
     }
 
     const handleInputChange = e => {
+        e.preventDefault();
         const { name, value } = e.target
-        // console.log(value)
+        console.log(value)
         setValues({
             ...values,
             [name]: value
@@ -69,16 +70,18 @@ export function useForm(validateOnChange = false) {
 
 
     const handleBankSelection = (e) => {
-        const { name, value } = e.target
+        e.preventDefault();
+        const { value } = e.target
+      
         setValues({
             ...values,
-            [name]: value
+            bank: value.des
         })
         if (validateOnChange)
-            validate({ [name]: value })
+            validate({ bank: value.des })
 
         setDisabled(false)
-        setBankValue(value)
+        setBankValue(value.code)
     }
 
     const resetForm = () => {
@@ -93,8 +96,8 @@ export function useForm(validateOnChange = false) {
             "nameE": newRow.nameE,
             "birthDate": dateAfterConversion,
             "personalId": +newRow.personalId,
-            "city": 'newRow.city',
-            "bank": 'newRow.bank',
+            "city": newRow.city,
+            "bank": newRow.bank,
             "branch": newRow.branch,
             "accountNumber": +newRow.accountNumber,
         }
