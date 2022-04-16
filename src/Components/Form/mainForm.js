@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core';
 import Controls from "../Controls/controls";
 import { useForm, Form } from './useForm';
+import { Link } from "react-router-dom";
 
 export default function MainForm() {
 
@@ -92,6 +93,7 @@ export default function MainForm() {
                             text="Reset"
                             color="default"
                             onClick={resetForm} />
+                        <Link to="table">View Yable</Link>
                     </Grid>
                 </Grid>
             </Form>
