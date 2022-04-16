@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core";
 // import axios from "axios";
+import dateFormat from '../../Utils/dateFormat';
 
 const initialFValues = {
     nameH: '',
@@ -31,7 +32,7 @@ export function useForm(validateOnChange = false) {
 
 
         if ('nameH' in fieldValues)
-            temp.nameH =  !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : "";
+            temp.nameH = !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : "";
         if ('nameE' in fieldValues)
             temp.nameE = fieldValues.nameE || fieldValues.nameE.length > 16 ? "" : "*This field is required. *Only English";
         if ('date' in fieldValues)
@@ -87,7 +88,8 @@ export function useForm(validateOnChange = false) {
 
 
     const setNewRow = async (newRow) => {
-        console.log(newRow)
+        const dateAfterConversion = dateFormat(newRow.date)
+
         // const date = newRow.date.toLocaleTimeString(["he-US"], {
         //     month: 'numeric',
         //     day: 'numeric',
