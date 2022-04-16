@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core";
-// import axios from "axios";
+import axios from "axios";
 import dateFormat from '../../Utils/dateFormat';
 
 const initialFValues = {
-    nameH: '',
-    nameE: '',
-    personalId: '',
+    nameH: 'דעכעדגכ',
+    nameE: 'sdffgfs',
+    personalId: '123456789',
     bank: '',
     city: '',
     date: new Date(),
     branch: '',
-    accountNumber: ''
+    accountNumber: '4556456'
 }
 
 export function useForm(validateOnChange = false) {
@@ -89,35 +89,34 @@ export function useForm(validateOnChange = false) {
 
     const setNewRow = async (newRow) => {
         const dateAfterConversion = dateFormat(newRow.date)
+        const newRowData = {
+            "nameH": newRow.nameH,
+            "nameE": newRow.nameE,
+            "birthDate": dateAfterConversion,
+            "personalId": +newRow.personalId,
+            "city": 'newRow.city',
+            "bank": 'newRow.bank',
+            "branch": newRow.branch,
+            "accountNumber": +newRow.accountNumber,
+        }
+        const data = JSON.stringify(newRowData);
 
-        // const date = newRow.date.toLocaleTimeString(["he-US"], {
-        //     month: 'numeric',
-        //     day: 'numeric',
-        //     hour: '2-digit',
-        //     minute: '2-digit'
-        // });
+        const config = {
+            method: 'post',
+            url: 'https://localhost:7155/api/UserList',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
 
-        // const response = await axios.get("https://xnesdeskserver.herokuapp.com/api/users/accountNumber", { params: { accountNumber: newRow.accountNumber } })
-        // if (response.data.length === 0) {
-        //     alert('no data founf')
-        //     return
-        // }
-        // const newRowData = {
-        //     "submitter": newRow.submitter,
-        //     "action": newRow.action,
-        //     "amount": newRow.amount,
-        //     "accountNumber": newRow.accountNumber,
-        //     "date": date,
-        //     "currency": newRow.currency,
-        //     "platform": newRow.platform,
-        //     "reason": newRow.reason,
-        //     "fullName": response.data[0].fullName,
-        //     "unumber": response.data[0].unumber,
-        //     "sheled": response.data[0].sheled,
-        //     "status": "pending"
-
-        // }
-        // const postingResponse = await axios.post("https://xnesdeskserver.herokuapp.com/api/buyingPowerList", { mode: 'cors', newRowData })
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     return {
