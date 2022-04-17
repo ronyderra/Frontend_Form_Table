@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText, ListItemIcon } from '@material-ui/core';
+import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@material-ui/core';
 import axios from 'axios'
 
 export default function Select(props) {
@@ -29,7 +29,7 @@ export default function Select(props) {
             }
         }
         getData()
-    }, [boolien, bankNumber])
+    }, [boolien, bankNumber, name])
 
     return (
         <FormControl variant="outlined" disabled={boolien}
@@ -38,13 +38,13 @@ export default function Select(props) {
             <MuiSelect
                 label={label}
                 name={name}
-                value={value    }
+                value={value}
                 onChange={onChange}
                 renderValue={() => value}
             >
                 {data && data.map(
                     (item, key) => (
-                        <MenuItem key={key} value={name === 'bank' ? { code: item.Code, des: item.Description } : item} >
+                        <MenuItem dir={'rtl'} key={key} value={name === 'bank' ? { code: item.Code, des: item.Description } : item} >
                             {name === 'bank' ? item.Description : item}
                         </MenuItem>
                     )

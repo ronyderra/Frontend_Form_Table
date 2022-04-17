@@ -29,8 +29,6 @@ export function useForm(validateOnChange = false) {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
 
-
-
         if ('nameH' in fieldValues)
             temp.nameH = !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : "";
         if ('nameE' in fieldValues)
@@ -59,7 +57,6 @@ export function useForm(validateOnChange = false) {
     const handleInputChange = e => {
         e.preventDefault();
         const { name, value } = e.target
-        console.log(value)
         setValues({
             ...values,
             [name]: value
