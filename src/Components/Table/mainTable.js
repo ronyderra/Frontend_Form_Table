@@ -8,26 +8,26 @@ import { Link } from "react-router-dom";
 import Controls from "../Controls/controls";
 
 const MainTable = () => {
-
   const [rowsData, setRowsData] = useState([{}])
 
   useEffect(() => {
-    let data = '';
-    const config = {
-      method: 'get',
-      url: 'https://localhost:7155/api/UserList',
-      headers: {},
-      data: data
-    };
-
-    axios(config)
-      .then(function (response) {
-        setRowsData(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+    const getData = () => {
+      let data = '';
+      const config = {
+        method: 'get',
+        url: 'https://localhost:7155/api/UserList',
+        headers: {},
+        data: data
+      };
+      axios(config)
+        .then(function (response) {
+          setRowsData(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    getData()
   }, []);
 
 

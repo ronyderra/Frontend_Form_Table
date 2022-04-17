@@ -16,13 +16,10 @@ const initialFValues = {
 }
 
 export function useForm(validateOnChange = false) {
-
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
     const [disabled, setDisabled] = useState(true)
     const [bankValue, setBankValue] = useState(4)
-
-
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -41,7 +38,7 @@ export function useForm(validateOnChange = false) {
         if ('branch' in fieldValues)
             temp.branch = fieldValues.branch ? "" : "This field is required.";
         if ('accountNumber' in fieldValues)
-            temp.accountNumber = fieldValues.accountNumber || fieldValues.accountNumber.length > 10 ? "" : "This field is required. *10 Numbers Max";
+            temp.accountNumber = !fieldValues.accountNumber || fieldValues.accountNumber.length > 10 ? "This field is required. *10 Numbers Max" : '';
 
         setErrors({
             ...temp
@@ -61,11 +58,9 @@ export function useForm(validateOnChange = false) {
             validate({ [name]: value })
     }
 
-
     const handleBankSelection = (e) => {
         e.preventDefault();
         const { value } = e.target
-
         setValues({
             ...values,
             bank: value.des
@@ -95,7 +90,6 @@ export function useForm(validateOnChange = false) {
             "accountNumber": +newRow.accountNumber,
         }
         const data = JSON.stringify(newRowData);
-
         const config = {
             method: 'post',
             url: 'https://localhost:7155/api/UserList',
@@ -108,6 +102,7 @@ export function useForm(validateOnChange = false) {
         await axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
+                alert('User Added!')
             })
             .catch(function (error) {
                 console.log(error);
