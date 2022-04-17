@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core";
 import axios from "axios";
 import dateFormat from '../../Utils/dateFormat';
+import { contains_heb, contains_eng, containsNumber, containsSpecialChars, errorString } from '../../Utils/validation'
 
 const initialFValues = {
     nameH: '',
@@ -21,20 +22,17 @@ export function useForm(validateOnChange = false) {
     const [disabled, setDisabled] = useState(true)
     const [bankValue, setBankValue] = useState(4)
 
-    const contains_heb = (str) => {
-        console.log((/[\u0590-\u05FF]/).test(str))
-        return (/[\u0590-\u05FF]/).test(str);
-    }
+
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
 
         if ('nameH' in fieldValues)
-            temp.nameH = !contains_heb(fieldValues.nameH) ? "*This field is required. *Only Hebrew" : "";
+            temp.nameH = fieldValues.nameH.length > 20 || !contains_heb(fieldValues.nameH) || containsNumber(fieldValues.nameH) || containsSpecialChars(fieldValues.nameH) ? errorString('Hebrew', 20) : "";
         if ('nameE' in fieldValues)
-            temp.nameE = fieldValues.nameE || fieldValues.nameE.length > 16 ? "" : "*This field is required. *Only English";
+            temp.nameE = fieldValues.nameE.length > 15 || !contains_eng(fieldValues.nameE) || containsNumber(fieldValues.nameE) || containsSpecialChars(fieldValues.nameE) ? errorString('English', 15) : "";
         if ('date' in fieldValues)
-            temp.date = fieldValues.date !== '$' ? "" : "This field is required.";
+            temp.date = fieldValues.date ? "" : "This field is required.";
         if ('personalId' in fieldValues)
             temp.personalId = fieldValues.personalId.length !== 9 ? "*This field is required. *Nine Numbers Only." : "";
         if ('bank' in fieldValues)
@@ -44,7 +42,7 @@ export function useForm(validateOnChange = false) {
         if ('branch' in fieldValues)
             temp.branch = fieldValues.branch ? "" : "This field is required.";
         if ('accountNumber' in fieldValues)
-            temp.accountNumber = fieldValues.accountNumber ? "" : "This field is required.";
+            temp.accountNumber = fieldValues.accountNumber || fieldValues.accountNumber.length > 10 ? "" : "This field is required. *10 Numbers Max";
 
         setErrors({
             ...temp

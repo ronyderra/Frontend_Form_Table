@@ -30,6 +30,7 @@ export default function MainForm() {
                             onChange={handleInputChange}
                             error={errors.nameH}
                             direction={"rtl"}
+                            type={'string'}
                         />
                         <Controls.Input
                             label="Name In English"
@@ -37,6 +38,7 @@ export default function MainForm() {
                             value={values.nameE}
                             onChange={handleInputChange}
                             error={errors.nameE}
+                            type={'string'}
                         />
                         <Controls.DatePicker
                             name="date"
@@ -50,6 +52,8 @@ export default function MainForm() {
                             value={values.personalId}
                             onChange={handleInputChange}
                             error={errors.personalId}
+                            type={'number'}
+
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -82,6 +86,7 @@ export default function MainForm() {
                             value={values.accountNumber}
                             onChange={handleInputChange}
                             error={errors.accountNumber}
+                            type={'number'}
                         />
                         <br />
                         <Controls.Button
