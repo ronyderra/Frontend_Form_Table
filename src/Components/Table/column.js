@@ -1,8 +1,7 @@
 import React from 'react'
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
+import { TableRow, TableCell } from '@mui/material';
 
-const Column = ({data}) => {
+const Column = ({ data }) => {
     return (
         <>
             {

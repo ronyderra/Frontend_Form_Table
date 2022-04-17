@@ -136,14 +136,13 @@ export function useForm(validateOnChange = false) {
 const useStyles = makeStyles(theme => ({
     root: {
         '& .MuiFormControl-root': {
-            width: '80%',
+            width: '88%',
             margin: theme.spacing(1),
         }
     }
 }))
 
 export function Form(props) {
-
     const classes = useStyles();
     const { children, ...other } = props;
     return (

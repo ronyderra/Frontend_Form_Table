@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import Controls from "../Controls/controls";
 import { useForm, Form } from './useForm';
 import { Link } from "react-router-dom";
+import { Container } from '@mui/material';
 
 export default function MainForm() {
 
@@ -18,10 +19,10 @@ export default function MainForm() {
     }
 
     return (
-        <div>
+        <Container maxWidth="lg">
             <Form onSubmit={handleSubmit}>
-                <Grid container>
-                    <Grid item xs={6}>
+                <Grid container >
+                    <Grid item xs={12} sm={6}>
                         <Controls.Input
                             label="Name In Hebrew"
                             name="nameH"
@@ -51,7 +52,7 @@ export default function MainForm() {
                             error={errors.personalId}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <Controls.Select
                             name="city"
                             label="City"
@@ -90,10 +91,10 @@ export default function MainForm() {
                             text="Reset"
                             color="default"
                             onClick={resetForm} />
-                        <Link to="table">View Yable</Link>
+                        <Link to="table">View Table</Link>
                     </Grid>
                 </Grid>
             </Form>
-        </div>
+        </Container>
     )
 }

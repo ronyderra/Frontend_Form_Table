@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import Paper from '@mui/material/Paper';
-import { Container } from '@mui/material';
+import { Container, Table, TableBody, TableContainer, TableHead, Paper } from '@mui/material';
 import Column from './column';
 import Row from './row';
 import axios from 'axios';
@@ -37,6 +32,7 @@ const MainTable = () => {
 
   return (
     <Container maxWidth="lg">
+      <Link to="/">Back To Form</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -47,7 +43,6 @@ const MainTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Link to="/">Back To Form</Link>
     </Container>
   );
 }
