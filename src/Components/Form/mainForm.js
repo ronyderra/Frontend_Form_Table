@@ -96,7 +96,11 @@ export default function MainForm() {
                             text="Reset"
                             color="default"
                             onClick={resetForm} />
-                        <Link to="table">View Table</Link>
+                        <Link to="/table" style={{ textDecoration: 'none' }}>
+                            <Controls.Button
+                                text="View Table"
+                                color="default" />
+                        </Link>
                     </Grid>
                 </Grid>
             </Form>

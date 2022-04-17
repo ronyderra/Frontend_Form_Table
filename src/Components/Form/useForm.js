@@ -26,7 +26,6 @@ export function useForm(validateOnChange = false) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-
         if ('nameH' in fieldValues)
             temp.nameH = fieldValues.nameH.length > 20 || !contains_heb(fieldValues.nameH) || containsNumber(fieldValues.nameH) || containsSpecialChars(fieldValues.nameH) ? errorString('Hebrew', 20) : "";
         if ('nameE' in fieldValues)

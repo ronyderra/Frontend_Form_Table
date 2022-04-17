@@ -5,6 +5,7 @@ import Row from './row';
 import axios from 'axios';
 import ColumnData from './columnData'
 import { Link } from "react-router-dom";
+import Controls from "../Controls/controls";
 
 const MainTable = () => {
 
@@ -32,7 +33,6 @@ const MainTable = () => {
 
   return (
     <Container maxWidth="lg">
-      <Link to="/">Back To Form</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -43,6 +43,12 @@ const MainTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <br />
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <Controls.Button
+          text="Back To Form"
+          color="default" />
+      </Link>
     </Container>
   );
 }
