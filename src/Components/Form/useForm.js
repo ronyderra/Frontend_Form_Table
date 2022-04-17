@@ -4,14 +4,14 @@ import axios from "axios";
 import dateFormat from '../../Utils/dateFormat';
 
 const initialFValues = {
-    nameH: 'דעכעדגכ',
-    nameE: 'sdffgfs',
-    personalId: '123456789',
+    nameH: '',
+    nameE: '',
+    personalId: '',
     bank: '',
     city: '',
     date: new Date(),
     branch: '',
-    accountNumber: '4556456'
+    accountNumber: ''
 }
 
 export function useForm(validateOnChange = false) {
@@ -55,7 +55,6 @@ export function useForm(validateOnChange = false) {
     }
 
     const handleInputChange = e => {
-        e.preventDefault();
         const { name, value } = e.target
         setValues({
             ...values,
@@ -69,7 +68,7 @@ export function useForm(validateOnChange = false) {
     const handleBankSelection = (e) => {
         e.preventDefault();
         const { value } = e.target
-      
+
         setValues({
             ...values,
             bank: value.des
