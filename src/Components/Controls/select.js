@@ -42,6 +42,7 @@ export default function Select(props) {
                 onChange={onChange}
                 renderValue={() => value}
             >
+                <MenuItem value="">None</MenuItem>
                 {data && data.map(
                     (item, key) => (
                         <MenuItem dir={'rtl'} key={key} value={name === 'bank' ? { code: item.Code, des: item.Description } : item} >

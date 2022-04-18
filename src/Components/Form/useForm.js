@@ -101,7 +101,6 @@ export const UseForm = (validateOnChange = false) => {
 
         await axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
                 alert('User Added!')
             })
             .catch(function (error) {
@@ -124,7 +123,6 @@ export const UseForm = (validateOnChange = false) => {
     }
 }
 
-
 const useStyles = makeStyles(theme => ({
     root: {
         '& .MuiFormControl-root': {
@@ -134,7 +132,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function Form(props) {
+export const Form = (props) => {
     const classes = useStyles();
     const { children, ...other } = props;
     return (
