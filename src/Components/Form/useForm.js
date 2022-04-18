@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core";
 import axios from "axios";
-import dateFormat from '../../Utils/dateFormat';
-import { contains_heb, contains_eng, containsNumber, containsSpecialChars, errorString } from '../../Utils/validation'
+import dateFormat from '../../Utils/DateFormat';
+import { Contains_heb, Contains_eng, ContainsNumber, ContainsSpecialChars, ErrorString } from '../../Utils/Validation'
 
 const initialFValues = {
     nameH: '',
@@ -15,7 +15,7 @@ const initialFValues = {
     accountNumber: ''
 }
 
-export function useForm(validateOnChange = false) {
+export const UseForm = (validateOnChange = false) => {
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
     const [disabled, setDisabled] = useState(true)
@@ -24,9 +24,9 @@ export function useForm(validateOnChange = false) {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('nameH' in fieldValues)
-            temp.nameH = fieldValues.nameH.length > 20 || !contains_heb(fieldValues.nameH) || containsNumber(fieldValues.nameH) || containsSpecialChars(fieldValues.nameH) ? errorString('Hebrew', 20) : "";
+            temp.nameH = fieldValues.nameH.length > 20 || !Contains_heb(fieldValues.nameH) || ContainsNumber(fieldValues.nameH) || ContainsSpecialChars(fieldValues.nameH) ? ErrorString('Hebrew', 20) : "";
         if ('nameE' in fieldValues)
-            temp.nameE = fieldValues.nameE.length > 15 || !contains_eng(fieldValues.nameE) || containsNumber(fieldValues.nameE) || containsSpecialChars(fieldValues.nameE) ? errorString('English', 15) : "";
+            temp.nameE = fieldValues.nameE.length > 15 || !Contains_eng(fieldValues.nameE) || ContainsNumber(fieldValues.nameE) || ContainsSpecialChars(fieldValues.nameE) ? ErrorString('English', 15) : "";
         if ('date' in fieldValues)
             temp.date = fieldValues.date ? "" : "This field is required.";
         if ('personalId' in fieldValues)
@@ -123,6 +123,7 @@ export function useForm(validateOnChange = false) {
         bankValue
     }
 }
+
 
 const useStyles = makeStyles(theme => ({
     root: {

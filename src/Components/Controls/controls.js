@@ -1,7 +1,7 @@
-import Input from "./input";
-import Select from "./select";
-import DatePicker from "./datePicker";
-import Button from "./button";
+import Input from "./Input";
+import Select from "./Select";
+import DatePicker from "./DatePicker";
+import Button from "./Button";
 
 const Controls = {
     Input,

@@ -1,19 +1,19 @@
-export const contains_heb = (str) => {
-    return (/[\u0590-\u05FF]/).test(str);
+export const Contains_heb = (str) => {
+    return (/^[\u0590-\u05FF" "-]+$/).test(str);
 }
-export const contains_eng = (str) => {
-    return (/^[a-zA-Z]+$/).test(str);
+export const Contains_eng = (str) => {
+    return (/^[a-zA-Z" "-]+$/).test(str);
 }
 
-export const containsNumber = (str) => {
+export const ContainsNumber = (str) => {
     return /\d/.test(str);
 }
 
-export const containsSpecialChars = (str) => {
+export const ContainsSpecialChars = (str) => {
     const specialChars = /[`!@#$%^&*()_+\=\[\]{};:\\|,.<>\/?~]/;
     return specialChars.test(str);
 }
 
-export const errorString = (lang, charachterLength) => {
+export const ErrorString = (lang, charachterLength) => {
     return "Required Field. *Only " + lang + ". *Name Must Be Shorter Than " + charachterLength + " Characters*"
 } 

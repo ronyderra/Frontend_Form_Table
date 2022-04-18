@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import MainForm from './Components/Form/mainForm'
-import MainTable from './Components/Table/mainTable'
+import MainForm from './Components/Form/MainForm'
+import MainTable from './Components/Table/MainTable'
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -11,7 +11,6 @@ function App() {
         <Route path="/" element={<MainForm />} />
         <Route path="table" element={<MainTable />} />
       </Routes>
-
     </div>
   );
 }

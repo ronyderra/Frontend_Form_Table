@@ -1,14 +1,14 @@
 import React from 'react'
 import { Grid } from '@material-ui/core';
-import Controls from "../Controls/controls";
-import { useForm, Form } from './useForm';
+import Controls from "../Controls/Controls";
+import { UseForm, Form } from './UseForm';
 import { Link } from "react-router-dom";
 import { Container } from '@mui/material';
 
 export default function MainForm() {
 
     const { disabled, bankValue, handleBankSelection, setNewRow, validate, values,
-        errors, handleInputChange, resetForm } = useForm(true);
+        errors, handleInputChange, resetForm } = UseForm(true);
 
     const handleSubmit = e => {
         e.preventDefault()

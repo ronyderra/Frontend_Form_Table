@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, TableBody, TableContainer, TableHead, Paper } from '@mui/material';
-import Column from './column';
-import Row from './row';
+import Column from './Column';
+import Row from './Row';
 import axios from 'axios';
-import ColumnData from './columnData'
+import UserColumnData from './ColumnData'
 import { Link } from "react-router-dom";
-import Controls from "../Controls/controls";
+import Controls from "../Controls/Controls";
 
 const MainTable = () => {
   const [rowsData, setRowsData] = useState([{}])
@@ -36,7 +36,7 @@ const MainTable = () => {
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
-            <Column data={ColumnData} />
+            <Column data={UserColumnData} />
           </TableHead>
           <TableBody>
             <Row data={rowsData} />
